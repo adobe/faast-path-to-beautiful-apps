@@ -66,14 +66,14 @@ Let's set up an action that helps you create and store an Access Token in Runtim
     ```
     `OW_NAMESPACE` should map to your `whisk namespace`, while `OW_AUTH` should map to your `whisk auth`. 
 1. You can find your `JWT_API_KEY` and `JWT_CLIENT_SECRET` in your Console Integration. 
-    ![8](./images/8.png)
+    ![8](../images/8.png)
 1. Save your `.env` file. 
 1. Now, we'll also populate the `jwt.json` file. 
     ```
     $ open jwt.json
     ```
     Use the JWT tab in your Console to replace the `jwt_payload` field. 
-    ![9](./images/9.png)
+    ![9](../images/9.png)
 1. Next, run the following command,
     ```
     awk -v ORS='\\n' '1' Desktop/private.key

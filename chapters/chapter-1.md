@@ -20,7 +20,7 @@
 
 ## Download all required resources
 
-- Download the [resources package](./resources.zip)
+- Download the [resources package](../resources.zip)
 - Unzip it and place all content on your Desktop
 
 ## Create new Integration on I/O Console
