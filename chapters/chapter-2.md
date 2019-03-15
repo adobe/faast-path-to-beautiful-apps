@@ -30,7 +30,8 @@ Once you've configured the CLI, you can create your first function to make sure 
 
 1. Next, create the action on Runtime: 
     ````
-    aio runtime action create hello ~/Desktop/hello.js
+    $ cd ~/Desktop
+    $ aio runtime action create hello ~/Desktop/hello.js
     ````
     If it's successful, you should see 
     ```
@@ -38,7 +39,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. Time to invoke the function:
     ```
-    aio runtime action invoke hello --result
+    $ aio runtime action invoke hello --result
     ```
     You should see the following output:
     ```
@@ -48,7 +49,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. You can also find out more about your activation by checking the activation log. Let's invoke it again.
     ```
-    aio runtime action invoke hello
+    $ aio runtime action invoke hello
     ```
     Upon invocation, you should also see an output that looks a bit like
     ```
@@ -56,7 +57,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
     Copy the ID and let's read the full activation log at 
     ```
-    aio runtime activation get <id>
+    $ aio runtime activation get <id>
     ```
 
 ### 2. Fun with Parameters
@@ -82,7 +83,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. Now that we have an updated action that takes params, try invoking your action again, first without parameter to see the default response
     ```
-    aio runtime action invoke hello --result
+    $ aio runtime action invoke hello --result
     ```
     You should see the following output:
     ```
@@ -92,7 +93,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. Time to pass in some parameters!
     ```
-    aio runtime action invoke hello --result --param name "Sarah" --param place "Canton"
+    $ aio runtime action invoke hello --result --param name "Sarah" --param place "Canton"
     ```
     You should see the following output:
     ```
@@ -102,7 +103,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. Sometimes it is helpful to invoke an action in a blocking style and receiving the activation record entirely instead of just the result. Try it:
     ```
-    aio runtime action invoke hello --blocking
+    $ aio runtime action invoke hello --blocking
     ```
     You should see the full activation log
     ```
@@ -146,11 +147,11 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 1. Update your hello action again, but with the `--web true` flag to indicate that this is a web action
     ```
-    aio runtime action update hello ~/Desktop/hello.js --web true
+    $ aio runtime action update hello ~/Desktop/hello.js --web true
     ```
 1. Now, let's grab the url that we can use to call this actiON
     ```
-    aio runtime action get hello --url
+    $ aio runtime action get hello --url
     ```
     This should return something that looks like ```https://adobeioruntime.net/api/v1/web/<NAMESPACE>/default/hello```
 1. Let's paste this url into your browser and see what you receive. It should be the same json response!
