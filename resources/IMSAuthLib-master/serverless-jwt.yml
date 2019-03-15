@@ -1,0 +1,51 @@
+service: jwtauth-workflow
+
+custom:
+  package: ${env:OW_PACKAGE, 'change-me'}
+  namespace: ${env:OW_NAMESPACE}
+  shared_namespace: ${env:OW_SHARED_NAMESPACE, '23294_54687'}
+  shared_oauth_package: oauth
+  shared_cache_package: cache
+  jwt_client_id: ${env:JWT_API_KEY, 'change-me'}
+  jwt_client_secret: ${env:JWT_CLIENT_SECRET, 'change-me'}
+  jwt_payload: ${file(./jwt.json):jwt_payload}
+  jwt_secret: ${file(./jwt.json):jwt_secret}
+  base_url: https://runtime.adobe.io
+  redirect_url: ${env:REDIRECT_URL, 'http://www.adobe.com'}
+  adobe_auth_package: ${env:LOCAL_AUTH_PACKAGE_BINDING, 'jwtauthp-shared'}
+  adobe_auth_seq_package: ${env:LOCAL_AUTH_PACKAGE, 'jwtauthp'}
+  jwtauth_seq_name: ${self:custom.adobe_auth_seq_package}/jwtauthenticate
+
+
+provider:
+  name: openwhisk
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-openwhisk
+
+functions:
+  # adobe/jwtauthenticate sequence
+  jwtauthenticate:
+    name: ${self:custom.jwtauth_seq_name}
+    sequence:
+      - /${self:custom.namespace}/${self:custom.adobe_auth_package}/jwtauth
+      - /${self:custom.shared_namespace}/${self:custom.shared_cache_package}/encrypt
+      - /${self:custom.shared_namespace}/${self:custom.shared_cache_package}/persist
+      - /${self:custom.shared_namespace}/${self:custom.shared_oauth_package}/success
+    annotations:
+      web-export: true
+
+resources:
+  packages:
+    adobe-oauth:
+      name: ${self:custom.adobe_auth_package}
+      binding: /${self:custom.shared_namespace}/${self:custom.shared_oauth_package}
+      parameters:
+        jwt_client_id: ${self:custom.jwt_client_id}
+        jwt_client_secret: ${self:custom.jwt_client_secret}
+        jwt_payload: ${self:custom.jwt_payload}
+        jwt_secret: ${self:custom.jwt_secret}
+        redirect_url: ${self:custom.redirect_url}
+    adobe:
+      name: ${self:custom.adobe_auth_seq_package}

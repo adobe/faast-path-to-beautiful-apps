@@ -1,0 +1,14 @@
+{
+  "client_id": "88f3xxxxxxxxxxxxxxxxxxxxx",
+  "client_secret": "68fabxxxxxxxxxxxxxxxxxxxxx",
+  "jwt_payload": { 
+    "exp": 1552094680,
+    "iss": "2A74xxxxxxxxxxxxxxxxxxxxx@AdobeOrg",
+    "sub": "12Bxxxxxxxxxxxxxxxxxxxxx@techacct.adobe.com",
+    "https://ims-na1.adobelogin.com/s/ent_adobeio_sdk": true,
+    "aud": "https://ims-na1.adobelogin.com/c/88f37bcfxxxxxxxxxxxxxxxxxxxxx" 
+  },
+  "token_exchange_url": "https://ims-na1.adobelogin.com/ims/exchange/jwt",
+  "console_get_orgs_url":"https://api.adobe.io/console/organizations",
+  "console_get_namespaces_url":"https://api.adobe.io/runtime/admin/namespaces/"
+}

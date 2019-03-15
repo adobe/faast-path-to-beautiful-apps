@@ -1,0 +1,21 @@
+{
+  "name": "imsauth",
+  "version": "0.0.3",
+  "description": "IMS Auth",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "serverless deploy -v;",
+    "//": [
+      "TODO Need to change deploy-jwt value to serverless deploy --config serverless-jwt.yml after",
+      "the PR https://github.com/serverless/serverless/pull/5589 gets merged"
+    ],
+    "deploy-jwt": "mv serverless.yml serverless-orig.yml; mv serverless-jwt.yml serverless.yml; serverless deploy; mv serverless.yml serverless-jwt.yml; mv serverless-orig.yml serverless.yml",
+    "wskdeploy": "wskdeploy",
+    "wskdeploy-jwt": "wskdeploy -m manifest-jwt.yml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "serverless-dotenv-plugin": "^2.0.1",
+    "serverless-openwhisk": "^0.18.2"
+  }
+}

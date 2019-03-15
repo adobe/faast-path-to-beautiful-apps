@@ -1,0 +1,10 @@
+{
+  "jwt_payload": {
+      "exp": 1xxxx,
+      "iss": "C74Fxxxxxxxx@AdobeOrg",
+      "sub": "94BBxxxxxxxx@techacct.adobe.com",
+      "https://ims-na1.adobelogin.com/s/ent_marketing_sdk": true,
+      "aud": "https://ims-na1.adobelogin.com/c/fd5943bxxxxxxxx"
+  },
+  "jwt_secret": ""
+}
