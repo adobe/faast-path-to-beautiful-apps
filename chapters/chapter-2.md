@@ -21,7 +21,7 @@ Feel free to play with the CLI while I walk you through a few key concepts in Ru
 ### 1. Basic Hello World
 Once you've configured the CLI, you can create your first function to make sure it's working. 
 
-1. Start by creating a file called `hello.js` on your Desktop with the following content
+1. Open a text editor, and start by creating a file called `hello.js` on your Desktop with the following content
     ```
     function main(params) {
       return {msg:  'Hello World!'};
@@ -86,7 +86,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
     then update your action using 
     ```
-    aio runtime action update hello ~/Desktop/hello.js
+    $ aio runtime action update hello ~/Desktop/hello.js
     ```
 1. Now that we have an updated action that takes params, try invoking your action again, first without parameter to see the default response
     ```
