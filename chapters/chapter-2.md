@@ -29,13 +29,18 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
 
 1. Next, create the action on Runtime: 
-    ````
+    ```
     $ cd ~/Desktop
     $ aio runtime action create hello ~/Desktop/hello.js
-    ````
-    If it's successful, you should see 
     ```
-    ok: created action hello
+1. Let's list the actions to see the one you just created
+    ```
+    $ aio runtime action list
+    ```
+    should return
+    ```
+    actions                                                             
+    /43611_xxxxx/hello                                private nodejs:10 
     ```
 1. Time to invoke the function:
     ```
@@ -53,7 +58,9 @@ Once you've configured the CLI, you can create your first function to make sure 
     ```
     Upon invocation, you should also see an output that looks a bit like
     ```
-    ok: invoked /your-namespace/hello with id <id>
+    {
+      "activationId": "4e159xxxxxxxxxxxxxx"
+    }
     ```
     Copy the ID and let's read the full activation log at 
     ```
