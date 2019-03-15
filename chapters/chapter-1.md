@@ -106,6 +106,7 @@
     ```
     should return an `Access Token` that looks like
     ![11](../images/11.png)
+    If you run into bugs, open your `config.js` file to double check your credentilas, and run both `aio conf set` commands again. 
 ### 3. Select your Integration
 1. Now that your Adobe I/O CLI is configured, you can use it to select your Integration. Run the following command:
     ```
@@ -121,9 +122,9 @@
     ```
     $ aio console list-integrations --page=2
     ```
-1. Once you identified your integration, use the <OrgID_IntegrationID> to select it
+1. Once you identified your integration, use the string of number in front of your integraion e.g. <43611_12345> to select it
     ```
-    $ aio console select-integration <OrgID_IntegrationID> 
+    $ aio console select-integration xxxxx_xxxxx 
     ```
     This step tells your CLI that now you want to interact with the Runtime namespace tied with this Integration.
     
@@ -132,11 +133,8 @@
     ```
     $ cd ~/Desktop/aio-cli-plugin-runtime-master/
     $ npm install -g
-    $ aio plugins link .
-    ```
-    If you run into any issues when you run the last command, try running the commands below:
-    ```
-    $ npm install -g globby
+    $ npm install globby
+    $ npm install request
     $ aio plugins link .
     ```
 1. You can validate this by typing in the following command:
