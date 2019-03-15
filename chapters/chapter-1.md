@@ -41,7 +41,7 @@
 
 1. Navigate to Adobe I/O Console at [https://console.adobe.io](https://console.adobe.io) in your browser
     - Login with the `Lab Administration` administrator credential that are provided on the front page.
-    ![1](./images/1.png)
+    ![1](../images/1.png)
 2. Select `Integrations`, and you should see the following screen
     ![2](./images/2.png)
 3. Select `New Integration`, then `Deploy serverless actions` and click `Continue`
