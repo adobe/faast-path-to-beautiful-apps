@@ -35,7 +35,7 @@
     ```
 2. Fill in the information as prompted for your certificate
 
-    ![6](./images/6.png)
+    ![6](../images/6.png)
 
 ### 2. Create Config.json File
 
@@ -43,17 +43,17 @@
     - Login with the `Lab Administration` administrator credential that are provided on the front page.
     ![1](../images/1.png)
 2. Select `Integrations`, and you should see the following screen
-    ![2](./images/2.png)
+    ![2](../images/2.png)
 3. Select `New Integration`, then `Deploy serverless actions` and click `Continue`
-    ![3](./images/3.png)
+    ![3](../images/3.png)
 4. Select `Service Account` and click `Continue`
-    ![4](./images/4.png)
+    ![4](../images/4.png)
 5. Fill in your Name and Description on this page, please use `L745-` + `YourName` (e.g. `L745-SarahXu`) as the name for your integration. 
-    ![5](./images/5.png)
+    ![5](../images/5.png)
 6. From the first part, you should now see 2 new files on your Desktop, `certificate_pub.crt` and `private.key`. Upload the `certificate_pub.crt` file in your browser to create your Integration
-   ![7](./images/7.png)
+   ![7](../images/7.png)
 7. After creating your integration, you will be able to view the details of your integration. Your screen should look similar to this.
-    ![8](./images/8.png)
+    ![8](../images/8.png)
 
 
 ---
@@ -74,9 +74,9 @@
     }
     ```
 1. Open the Integration you just created, from the `Client Credentials` list, copy the value of `API Key (Client ID)` to replace the `client_id` in `config.json`, and `Client secret` to replace the `client_secret`. 
-    ![8](./images/8.png)
+    ![8](../images/8.png)
 1. Navigate to the JWT tab on your Integration, you should see the `JWT payload` block, copy it to replace the `jwt_payload` line in `config.json`.
-    ![9](./images/9.png)
+    ![9](../images/9.png)
 1. Save all your changes and your `config.json` should look something like this:
     ```
     {
@@ -105,7 +105,7 @@
     $ aio jwt-auth access-token
     ```
     should return an `Access Token` that looks like
-    ![11](./images/11.png)
+    ![11](../images/11.png)
 ### 3. Select your Integration
 1. Now that your Adobe I/O CLI is configured, you can use it to select your Integration. Run the following command:
     ```
