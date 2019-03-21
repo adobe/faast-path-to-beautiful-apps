@@ -1,2 +1,0 @@
-Property        Value               
-whisk namespace some_namespace      

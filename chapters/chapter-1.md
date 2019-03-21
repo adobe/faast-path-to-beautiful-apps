@@ -131,10 +131,7 @@
 ### 3. Add Runtime Plugin for your Adobe I/O CLI
 1. Let's build and install the Runtime Plugin for your Adobe I/O CLI
     ```
-    $ cd ~/Desktop/aio-cli-plugin-runtime-master/
-    $ npm install -g
-    $ npm install globby
-    $ npm install request
+    $ cd ~/Desktop/aio-cli-plugin-runtime-SummitLab/
     $ aio plugins link .
     ```
 1. You can validate this by typing in the following command:
