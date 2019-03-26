@@ -76,9 +76,9 @@ Let's set up an action that helps you create and store an Access Token in Runtim
     ![9](../images/9.png)
 1. Next, run the following command,
     ```
-    awk -v ORS='\\n' '1' Desktop/private.key
+    awk -v ORS='\\n' '1' Desktop/private.key | pbcopy
     ```
-    Copy the returned string, starting from ```-----BEGIN PRIVATE KEY-----``` to ```-----END PRIVATE KEY-----```, and paste it into `jwt_secret` field.
+    The private key has now been copied to your clipboard. Paste it into `jwt_secret` field. Starting from ```-----BEGIN PRIVATE KEY-----``` to ```-----END PRIVATE KEY-----```.
 1. Save your `jwt.json` file. 
 1. Your AUTH library is now set up. Let's deploy it into your namespace by running the following command. 
     ```
