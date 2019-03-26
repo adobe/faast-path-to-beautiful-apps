@@ -129,6 +129,10 @@ Let's set up an action that helps you create and store an Access Token in Runtim
 **Challenge:** Let's sequence this action with a Target API call. There's a sample action on your Desktop `target.js`. Can you figure out how to create a sequence that use the access token you just create to make an API call to Target?
 
 ---
----
+### Navigate
+
+| **Next:**                                                        |
+| ---------------------------------------------------------------- |
+| Lesson 5 - [Use Project Starter to build an app with UI](chapter-5.md) |
 
 **Return Home:** [Workbook Index](../README.md)

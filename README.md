@@ -37,7 +37,8 @@ This workshop is intended to cover the following topics:
 
 ## Next Steps
 
-Adobe I/O Runtime is currently in beta and going GA in the Summer. Come talk to the lab instructor to discuss joining the beta progran and stay tuned on adobe.io!
+- Adobe I/O Runtime is currently in beta and going GA in the Summer. Come talk to the lab instructor to discuss joining the beta progran and stay tuned on adobe.io!
+- Sign up for our newsletter on updates for Adobe I/O Cloud Native Applications! http://bit.ly/aio-cna
 
 ## Additional Resources
 
