@@ -89,6 +89,7 @@ class PropertyGet extends RuntimeBaseCommand {
         },
         {
           printLine: this.log,
+          'no-truncate': true,
           ...flags // parsed flags
         })
     } catch (err) {

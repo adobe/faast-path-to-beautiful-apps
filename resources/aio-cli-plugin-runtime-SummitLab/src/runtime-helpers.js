@@ -91,6 +91,10 @@ function createComponentsfromSequence (sequenceAction, ns) {
   return objSequence
 }
 
+function returnIntersection (firstObject, secondObject) {
+  return Object.keys(firstObject).filter(key => key in secondObject)
+}
+
 function parsePathPattern (path) {
   const pattern = /^\/(.+)\/(.+)$/i
   let defaultMatch = [ null, null, path ]
@@ -104,5 +108,6 @@ module.exports = {
   createKeyValueObjectFromFlag,
   createKeyValueObjectFromFile,
   parsePathPattern,
-  createComponentsfromSequence
+  createComponentsfromSequence,
+  returnIntersection
 }

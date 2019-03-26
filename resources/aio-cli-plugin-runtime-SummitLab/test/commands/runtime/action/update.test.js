@@ -113,6 +113,7 @@ describe('instance methods', () => {
 
   describe('run', () => {
     let jsFile = fixtureFile('action/actionFile.js')
+    ow.mockResolved('actions.client.options', '')
     test('exists', async () => {
       expect(command.run).toBeInstanceOf(Function)
     })
@@ -166,7 +167,7 @@ describe('instance methods', () => {
 
     test('updates an action with action name and --sequence flag', () => {
       let cmd = ow.mockResolved(owAction, '')
-      ow.mockResolved('actions.get', { namespace: 'ns' })
+      ow.actions.client.options = { namespace: 'ns' }
       command.argv = ['hello', '--sequence', 'a,b,c']
       return command.run()
         .then(() => {

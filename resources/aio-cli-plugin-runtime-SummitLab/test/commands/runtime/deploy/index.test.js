@@ -16,6 +16,8 @@ const RuntimeBaseCommand = require('../../../../src/RuntimeBaseCommand.js')
 const ow = require('openwhisk').mock
 const owPackage = 'packages.update'
 const owAction = 'actions.update'
+const owTriggers = 'triggers.update'
+const owRules = 'rules.update'
 
 test('exports', async () => {
   expect(typeof TheCommand).toEqual('function')
@@ -67,11 +69,20 @@ describe('instance methods', () => {
       'deploy/parameters.json': fixtureFile('deploy/parameters.json'),
       'deploy/apis_not_implemented.yml': fixtureFile('deploy/apis_not_implemented.yml'),
       'deploy/sequences_implemented.yml': fixtureFile('deploy/sequences_implemented.yml'),
-      'deploy/sequences_missing_actions.yml': fixtureFile('deploy/sequences_missing_actions.yml'),
-      'deploy/triggers_not_implemented.yml': fixtureFile('deploy/triggers_not_implemented.yml'),
-      'deploy/rules_not_implemented.yml': fixtureFile('deploy/rules_not_implemented.yml'),
+      'deploy/manifest_triggersRules.yaml': fixtureFile('deploy/manifest_triggersRules.yaml'),
+      'deploy/manifest_triggersRules_IncorrectAction.yaml': fixtureFile('deploy/manifest_triggersRules_IncorrectAction.yaml'),
+      'deploy/manifest_triggersRules_noInputs.yaml': fixtureFile('deploy/manifest_triggersRules_noInputs.yaml'),
       'deploy/manifest.yaml': fixtureFile('deploy/manifest.yaml'),
+      'deploy/manifest_dep.yaml': fixtureFile('deploy/manifest_dep.yaml'),
+      'deploy/deployment_wrongPackageName.yaml': fixtureFile('deploy/deployment_wrongPackageName.yaml'),
+      'deploy/deployment-triggerError.yaml': fixtureFile('deploy/deployment-triggerError.yaml'),
+      'deploy/deployment_wrongTrigger.yaml': fixtureFile('deploy/deployment_wrongTrigger.yaml'),
+      'deploy/deployment.yaml': fixtureFile('deploy/deployment.yaml'),
+      'deploy/manifest_dep_Triggers.yaml': fixtureFile('deploy/manifest_dep_Triggers.yaml'),
+      'deploy/sequences_missing_actions.yml': fixtureFile('deploy/sequences_missing_actions.yml'),
+      'deploy/manifest_triggersRules_NoTrigger.yaml': fixtureFile('deploy/manifest_triggersRules_NoTrigger.yaml'),
       'deploy/manifest_zip.yaml': fixtureFile('deploy/manifest_zip.yaml'),
+      'deploy/manifest_multiple_packages.yaml': fixtureFile('deploy/manifest_multiple_packages.yaml'),
       'deploy/manifest.yml': fixtureFile('deploy/manifest.yml'),
       'deploy/hello.js': fixtureFile('deploy/hello.js'),
       'deploy/hello_plus.js': fixtureFile('deploy/hello_plus.js'),
@@ -87,6 +98,9 @@ describe('instance methods', () => {
 
   describe('run', () => {
     ow.mockResolved('packages.get', '')
+    ow.mockResolved('actions.client.options', 'ns')
+    ow.mockResolved(owRules, '')
+    ow.mockResolved(owTriggers, '')
     let hello = fixtureFile('deploy/hello.js')
     let helloPlus = fixtureFile('deploy/hello_plus.js')
     test('exists', async () => {
@@ -107,6 +121,40 @@ describe('instance methods', () => {
         })
     })
 
+    test('deploys triggers with --deployment flag and deployment.yaml', () => {
+      let cmd = ow.mockResolved(owTriggers, '')
+      command.argv = ['-m', '/deploy/manifest_dep.yaml', '--deployment', '/deploy/deployment.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalledWith({
+            name: 'meetPerson',
+            trigger: {
+              parameters: [
+                {
+                  key: 'name',
+                  value: 'Elrond'
+                },
+                {
+                  key: 'children',
+                  value: 3
+                }
+              ]
+            }
+          })
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('multiple packages should be created even if one package is in common', () => {
+      let cmd = ow.mockResolved(owPackage, '')
+      command.argv = ['-m', '/deploy/manifest_multiple_packages.yaml', '--deployment', '/deploy/deployment.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalledTimes(2)
+          expect(stdout.output).toMatch('')
+        })
+    })
+
     test('manifest.yml missing', () => {
       const toRemove = [ '/deploy/manifest.yml' ]
       fakeFileSystem.removeKeys(toRemove)
@@ -118,6 +166,77 @@ describe('instance methods', () => {
         .then(() => {
           expect(cmd).toHaveBeenCalledWith({ name: 'demo_package' })
           expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('deploys triggers defined in manifest file', () => {
+      ow.mockResolved(owRules, '')
+      let cmd = ow.mockResolved(owTriggers, '')
+      command.argv = ['-m', '/deploy/manifest_triggersRules.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalledWith({
+            name: 'meetPerson',
+            trigger: {
+              parameters: [{
+                key: 'name',
+                value: 'Sam'
+              }]
+            }
+          })
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('deploys rules defined in manifest file', () => {
+      let cmd = ow.mockResolved(owRules, '')
+      command.argv = ['-m', '/deploy/manifest_triggersRules.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalled()
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('deploys trigger without inputs in manifest file', () => {
+      let cmd = ow.mockResolved(owRules, '')
+      command.argv = ['-m', '/deploy/manifest_triggersRules_noInputs.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalled()
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('deploys multiple triggers', () => {
+      let cmd = ow.mockResolved(owTriggers, '')
+      command.argv = ['-m', '/deploy/manifest_dep_Triggers.yaml', '--deployment', '/deploy/deployment.yaml']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalledTimes(2)
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('errors out on rules not having trigger component', (done) => {
+      ow.mockRejected(owRules, '')
+      command.argv = ['-m', '/deploy/manifest_triggersRules_NoTrigger.yaml']
+      return command.run()
+        .then(() => done.fail('does not throw error'))
+        .catch((err) => {
+          expect(err).toMatchObject(new Error('Failed to deploy: Trigger and Action are both required for rule creation'))
+          done()
+        })
+    })
+
+    test('errors out on rules having incorrect action name', (done) => {
+      ow.mockRejected(owRules, '')
+      command.argv = ['-m', '/deploy/manifest_triggersRules_IncorrectAction.yaml']
+      return command.run()
+        .then(() => done.fail('does not throw error'))
+        .catch((err) => {
+          expect(err).toMatchObject(new Error('Failed to deploy: Action/Trigger provided in the rule not found in manifest file'))
+          done()
         })
     })
 
@@ -243,24 +362,35 @@ describe('instance methods', () => {
         })
     })
 
-    test('triggers feature should throw an error (not implemented)', (done) => {
-      ow.mockRejected(owAction, new Error('an error'))
-      command.argv = [ '-m', '/deploy/triggers_not_implemented.yml' ]
+    test('errors should be thrown when deployment file does not contain correct package name', (done) => {
+      ow.mockRejected(owPackage, new Error('an error'))
+      command.argv = [ '-m', '/deploy/manifest_dep.yaml', '--deployment', '/deploy/deployment_wrongPackageName.yaml' ]
       return command.run()
         .then(() => done.fail('does not throw error'))
         .catch((err) => {
-          expect(err).toMatchObject(new Error('Failed to deploy: The "triggers" key is not implemented for the deploy manifest.'))
+          expect(err).toMatchObject(new Error('Failed to deploy: Package name in deployment file not present in manifest file'))
           done()
         })
     })
 
-    test('rules feature should throw an error (not implemented)', (done) => {
-      ow.mockRejected(owAction, new Error('an error'))
-      command.argv = [ '-m', '/deploy/rules_not_implemented.yml' ]
+    test('error should be thrown when deployment file does not contain trigger inputs', (done) => {
+      ow.mockRejected(owPackage, new Error('an error'))
+      command.argv = [ '-m', '/deploy/manifest_dep.yaml', '--deployment', '/deploy/deployment-triggerError.yaml' ]
       return command.run()
         .then(() => done.fail('does not throw error'))
         .catch((err) => {
-          expect(err).toMatchObject(new Error('Failed to deploy: The "rules" key is not implemented for the deploy manifest.'))
+          expect(err).toMatchObject(new Error('Failed to deploy: Inputs not present in Trigger'))
+          done()
+        })
+    })
+
+    test('errors should be thrown when deployment file does not contain correct trigger name', (done) => {
+      ow.mockRejected(owTriggers, new Error('an error'))
+      command.argv = [ '-m', '/deploy/manifest_dep.yaml', '--deployment', '/deploy/deployment_wrongTrigger.yaml' ]
+      return command.run()
+        .then(() => done.fail('does not throw error'))
+        .catch((err) => {
+          expect(err).toMatchObject(new Error('Failed to deploy: Trigger name in deployment file not present in manifest file'))
           done()
         })
     })

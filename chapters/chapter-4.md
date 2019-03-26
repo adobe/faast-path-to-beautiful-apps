@@ -80,7 +80,7 @@ Let's set up an action that helps you create and store an Access Token in Runtim
     ```
     Copy the returned string, starting from ```-----BEGIN PRIVATE KEY-----``` to ```-----END PRIVATE KEY-----```, and paste it into `jwt_secret` field.
 1. Save your `jwt.json` file. 
-1. Your AUTH libraby is now set up. Let's deploy it into your namespace by running the following command. 
+1. Your AUTH library is now set up. Let's deploy it into your namespace by running the following command. 
     ```
     $ npm install
     $ npm run deploy-jwt

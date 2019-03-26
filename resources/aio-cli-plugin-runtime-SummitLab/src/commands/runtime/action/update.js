@@ -88,8 +88,8 @@ class ActionUpdate extends RuntimeBaseCommand {
         if (sequenceAction[0].length === 0) {
           throw new Error('Provide a valid sequence component')
         } else {
-          const getAction = await ow.actions.get(sequenceAction[0])
-          let ns = getAction.namespace
+          let opts = await ow.actions.client.options
+          let ns = opts.namespace
           options['exec'] = createComponentsfromSequence(sequenceAction, ns)
         }
       }

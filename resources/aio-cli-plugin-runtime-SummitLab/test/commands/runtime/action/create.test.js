@@ -113,6 +113,7 @@ describe('instance methods', () => {
 
   describe('run', () => {
     let jsFile = fixtureFile('action/actionFile.js')
+    ow.mockResolved('actions.client.options', '')
     test('exists', async () => {
       expect(command.run).toBeInstanceOf(Function)
     })
@@ -123,6 +124,29 @@ describe('instance methods', () => {
       return command.run()
         .then(() => {
           expect(cmd).toHaveBeenCalledWith({ 'name': 'hello', 'action': jsFile, 'annotations': {}, kind: 'nodejs:10', 'limits': {}, 'params': {} })
+          expect(stdout.output).toMatch('')
+        })
+    })
+
+    test('creates an action with action name and --sequence flag', () => {
+      ow.actions.client.options = { namespace: 'ns' }
+      console.log(ow)
+      let cmd = ow.mockResolved(owAction, '')
+      command.argv = ['hello', '--sequence', 'a,b,c']
+      return command.run()
+        .then(() => {
+          expect(cmd).toHaveBeenCalledWith({
+            name: 'hello',
+            action: '',
+            annotations: {},
+            limits: {},
+            params: {},
+            kind: 'nodejs:10',
+            exec: {
+              kind: 'sequence',
+              components: [ '/ns/a', '/ns/b', '/ns/c' ]
+            }
+          })
           expect(stdout.output).toMatch('')
         })
     })
@@ -245,28 +269,6 @@ describe('instance methods', () => {
             limits: {
               'logs': 8,
               'memory': 128
-            }
-          })
-          expect(stdout.output).toMatch('')
-        })
-    })
-
-    test('creates an action with action name and --sequence flag', () => {
-      let cmd = ow.mockResolved(owAction, '')
-      ow.mockResolved('actions.get', { namespace: 'ns' })
-      command.argv = ['hello', '--sequence', 'a,b,c']
-      return command.run()
-        .then(() => {
-          expect(cmd).toHaveBeenCalledWith({
-            name: 'hello',
-            action: '',
-            annotations: {},
-            limits: {},
-            params: {},
-            kind: 'nodejs:10',
-            exec: {
-              kind: 'sequence',
-              components: [ '/ns/a', '/ns/b', '/ns/c' ]
             }
           })
           expect(stdout.output).toMatch('')
