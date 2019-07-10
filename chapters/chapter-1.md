@@ -8,7 +8,6 @@
 
 ## Lab Tasks
 
-- Download all required resources
 - Create new Integration on I/O Console
     - Log into Adobe I/O Console
     - Create new Integration for a Runtime Namespace
@@ -17,11 +16,6 @@
     - Set up Runtime Namespace
 
 ---
-
-## Download all required resources
-
-- Download the [resources package](../resources.zip)
-- Unzip it and place the content of the "resources" folder on the Desktop
 
 ## Create new Integration on I/O Console
 
@@ -128,12 +122,8 @@
     ```
     This step tells your CLI that now you want to interact with the Runtime namespace tied with this Integration.
     
-### 3. Add Runtime Plugin for your Adobe I/O CLI
-1. Let's build and install the Runtime Plugin for your Adobe I/O CLI
-    ```
-    $ cd ~/Desktop/aio-cli-plugin-runtime-SummitLab/
-    $ aio plugins link .
-    ```
+### 3. Validate Runtime Plugin for your Adobe I/O CLI
+1. You should have the Runtime Plugin installed at this point.
 1. You can validate this by typing in the following command:
     ```
     $ aio runtime property get

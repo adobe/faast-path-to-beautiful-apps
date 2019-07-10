@@ -3,6 +3,7 @@
 
 ## Table of Contents
 
+- Lesson 0 - [Pre-requisites: Set up your machine](chapters/chapter-0.md)
 - Lesson 1 - [Set up your Runtime Namespace](chapters/chapter-1.md)
 - Lesson 2 - [Create your first Runtime Action](chapters/chapter-2.md)
 - Lesson 3 - [Create your first Sequence](chapters/chapter-3.md)
@@ -26,18 +27,11 @@ This workshop is intended to cover the following topics:
 
 - Adobe I/O Runtime
 - Adobe I/O CLI
-- Adobe I/O CNA Project Starter
-
-## Prerequisites
-
-- Workshop Info & Credential
-- Adobe Enterprise Org
-- Adobe I/O CLI
-- Adobe I/O Runtime Access 
+- Adobe I/O Cloud Native Application Project Starter
 
 ## Next Steps
 
-- Adobe I/O Runtime is currently in beta and going GA in the Summer. Come talk to the lab instructor to discuss joining the beta progran and stay tuned on adobe.io!
+- Adobe I/O Runtime celebrated GA in June! Come talk to the instructor to discuss joining the progranm and stay tuned on adobe.io!
 - Sign up for our newsletter on updates for Adobe I/O Cloud Native Applications! http://bit.ly/aio-cna
 
 ## Additional Resources
