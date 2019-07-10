@@ -1,5 +1,5 @@
 
-# L745 - The FaaSt path to Beautiful Applications
+# Adobe I/O Lab Workbook - The FaaSt path to Beautiful Applications
 
 ## Table of Contents
 
@@ -7,7 +7,8 @@
 - Lesson 1 - [Set up your Runtime Namespace](chapters/chapter-1.md)
 - Lesson 2 - [Create your first Runtime Action](chapters/chapter-2.md)
 - Lesson 3 - [Create your first Sequence](chapters/chapter-3.md)
-- Lesson 4 - [Call Target from Runtime](chapters/chapter-4.md)
+- Lesson 4 (DX) - [Call Target from Runtime](chapters/chapter-4.md)
+- Lesson 4 (DMe) - [Send Creative Cloud Assets to Slack](chapters/chapter-4-v2.md)
 - Lesson 5 - [Use Project Starter to build an app with UI](chapters/chapter-5.md)
 
 ## Lab Overview

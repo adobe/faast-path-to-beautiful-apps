@@ -1,9 +1,9 @@
 var request = require("request");
 
 function main(params) {
-    var accessToken = "Bearer " + params.body.accessToken;
+    var accessToken = "Bearer " + params.accessToken;
     var tenant = "summit2017lab";
-    var client_id = params.body.profileID.replace("JWT", ""); 
+    var client_id = params.client_id; 
     
     console.log('access token: ', accessToken);
     console.log('tenant: ', tenant);

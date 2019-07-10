@@ -1,6 +1,0 @@
-project:
-  packages:
-      testSeq:
-        triggers:
-          meetPerson:
-            inputs:

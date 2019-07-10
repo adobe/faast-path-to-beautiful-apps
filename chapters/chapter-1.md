@@ -34,7 +34,7 @@
 ### 2. Create Config.json File
 
 1. Navigate to Adobe I/O Console at [https://console.adobe.io](https://console.adobe.io) in your browser
-    - Login with the `Lab Administration` administrator credential that are provided on the front page.
+    - Login with the credential that are provided on the slide.
     ![1](../images/1.png)
 2. Select `Integrations`, and you should see the following screen
     ![2](../images/2.png)
@@ -42,7 +42,7 @@
     ![3](../images/3.png)
 4. Select `Service Account` and click `Continue`
     ![4](../images/4.png)
-5. Fill in your Name and Description on this page, please use `L745-` + `YourName` (e.g. `L745-SarahXu`) as the name for your integration. 
+5. Fill in your Name and Description on this page, please use `APAC-` + `YourName` (e.g. `APAC-SarahXu`) as the name for your integration. 
     ![5](../images/5.png)
 6. From the first part, you should now see 2 new files on your Desktop, `certificate_pub.crt` and `private.key`. Upload the `certificate_pub.crt` file in your browser to create your Integration
    ![7](../images/7.png)
@@ -56,7 +56,7 @@
 **GOAL:** In this section, we are going to set up Adobe I/O CLI that allows you to interact with your Runtime namespace.
 
 ### 1. Create Config.json File
-1. Find a `config.json` file on your Desktop. We are going to fill in the details based on the Integration you just created.
+1. Find a `config.json` file in your Resources. We are going to fill in the details based on the Integration you just created.
     ```
     {
       "client_id": "value from your Console Integration (String)",
@@ -94,13 +94,17 @@
     $ aio config set jwt-auth ~/Desktop/config.json --file --mime-type=application/json
     $ aio config set jwt-auth.jwt_private_key ~/Desktop/private.key --file --mime-type=application/x-pem-file
     ```
-1. Your Adobe I/O CLI is now configured for your Organization. You can run the following command to validate:
+1. Your Adobe I/O CLI is now configured for your Organization. You can always check your configuration via
+    ```
+    $ aio config
+    ```
+1. You can run the following command to validate your config value. This command uses the values you have set to request an Access Token.
     ```
     $ aio jwt-auth access-token
     ```
     should return an `Access Token` that looks like
     ![11](../images/11.png)
-    If you run into bugs, open your `config.js` file to double check your credentilas, and run both `aio conf set` commands again. 
+    If you run into bugs, open your `config.js` file to double check your credentilas, and run both `aio config set` commands again. 
 ### 3. Select your Integration
 1. Now that your Adobe I/O CLI is configured, you can use it to select your Integration. Run the following command:
     ```
@@ -130,9 +134,9 @@
     ```
     which should return your Runtime credentials
     ```
-    whisk auth		0ae3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    whisk API host		https://adobeioruntime.net
-    whisk namespace		43611_xxxxx
+    whisk auth      0ae3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    whisk API host      https://adobeioruntime.net
+    whisk namespace     43611_xxxxx
     ```
 ---
 

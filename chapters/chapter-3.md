@@ -94,6 +94,7 @@ For example, what if you have serverless functions to implement an external API 
 
 | **Next:**                                                        |
 | ---------------------------------------------------------------- |
-| Lesson 4 - [Call Target from Runtime](chapter-4.md) |
+| Lesson 4 (Dx) - [Call Target from Runtime](chapter-4.md) |
+| Lesson 4 (DMe) - [Call Sensei API from Runtime](chapter-4-v2.md) |
 
 **Return Home:** [Workbook Index](../README.md)

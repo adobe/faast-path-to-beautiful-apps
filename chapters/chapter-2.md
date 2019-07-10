@@ -126,6 +126,12 @@ Once you've configured the CLI, you can create your first function to make sure 
     }
 
     ```
+1. You can also bind default parameters to an action. Let's bind a place to our `hello` action.
+    ```
+    $ aio runtime action update hello ~/Desktop/hello.js --param place Sydney
+    ```
+    Try to invoke it again without passing in any parameters, and you can see that even if you don't pass in any parameters, the action still returns `"Hello, stranger from Kansas!"`. Bound parameters can still be overwritten by specifying the parameter value at invocation time.
+
 ### 3. Understand web actions
 1. Web actions are OpenWhisk actions annotated to quickly enable you to build web based applications. Let's now turn the action we built into a web action. Open `hello.js` and update the code as below
     ```
@@ -171,7 +177,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     }
     ```
 1. **Challenge:** Can you figure out how to modify the url so that the response says "Hello, Dragos from Iaschi!"
-    - Bonus point if you know where Iaschi is :)
+
 ---
 
 ### Navigate
