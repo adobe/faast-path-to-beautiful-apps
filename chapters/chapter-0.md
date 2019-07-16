@@ -20,7 +20,8 @@ Please make sure you have a text editor available on your laptop. It can be Text
 ### 2. Terminal / Command Prompt
 You will have to type in commands, using the Terminal application in Mac OS X. You can find the Terminal application in the Application > Utilities folder.
 
-On Windows, Terminal is named Command Prompt program.
+On Windows, use 'Git Bash' 
+You can run Git Bash by opening **Start Menu > Git > Git Bash**
 
 
 ### 3. Node and NPM
@@ -65,11 +66,6 @@ On Windows, Terminal is named Command Prompt program.
     ```
     $ serverless --help
     ```
-    
-### 6. OpenSSL (for Windows users only)
-
-1. Please download [OpenSSL Client](https://bintray.com/vszakats/generic/download_file?file_path=openssl-1.1.1-win64-mingw.zip)
-1. Extract the folder and copy it to the C:/libs/ location.
 
   
 ## Download all required resources
