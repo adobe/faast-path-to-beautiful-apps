@@ -26,6 +26,7 @@ Once you've configured the CLI, you can create your first function to make sure 
     function main(params) {
       return {msg:  'Hello World!'};
     }
+    exports.main = main
     ```
 
 1. Next, create the action on Runtime: 
@@ -83,6 +84,7 @@ Once you've configured the CLI, you can create your first function to make sure 
       // construct the message using the values for name and place
       return {msg:  'Hello, ' + name + ' from ' + place + '!'};
     }
+    exports.main = main;
     ```
     then update your action using 
     ```
@@ -157,6 +159,7 @@ Once you've configured the CLI, you can create your first function to make sure 
       // construct the message using the values for name and place
       return returnObject;
     }
+    exports.main = main;
     ```
 1. Update your hello action again, but with the `--web true` flag to indicate that this is a web action
     ```
